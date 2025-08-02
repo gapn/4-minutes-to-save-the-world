@@ -1,0 +1,7 @@
+# Ignore OS junk
+.DS_Store
+Thumbs.db
+
+# Ignore build/temp if needed
+/dist
+/node_modules
