@@ -1,9 +1,30 @@
 # 4 Minutes to Save the World 🎮
 
-Concept:
-- 3 labyrinth levels
-- 4 minute timer
-- Checkpoints give bonus time if reached in time to max total time of 5 minute
-- Side paths contain messages that can be collected and shown in the epilogue
+**Game Jam:** Tiny but Mighty (FreeCodeCamp, August 2025)
+**Theme:** Small but impactful and meaningful
 
-This is the skeleton repo. Actual code to be added step by step.
+---
+
+## Concept (PROPOSED)
+
+Player must run through 3 labyrinths in 4 minutes.
+
+- Timer starts at 4:00.
+- Only reaching checkpoints in time adds bonus seconds (max 5:00 total).
+- Some dead ends contain meaningful messages the player can save.
+
+---
+
+## Tech
+
+- HTML `<canvas>` for maze & player
+- CSS for layout + overlays
+- JavaScript for core game logic
+
+---
+
+## Progress 🚀
+
+- ✅ Initial skeleton (HTML, CSS, JS, README, .gitignore)
+- ✅ Maze layout rendering on canvas
+- ⏳ Next: Implement player movement
