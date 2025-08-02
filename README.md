@@ -15,6 +15,20 @@ Player must run through 3 labyrinths in 4 minutes.
 
 ---
 
+## Controls
+
+- **Arrow Keys** → Move the player
+
+---
+
+## Features (so far)
+
+- Tile-based map rendering from a 2D matrix
+- Basic collision detection (walls)
+- Smooth animated player movement
+
+---
+
 ## Tech
 
 - HTML `<canvas>` for maze & player
@@ -27,4 +41,5 @@ Player must run through 3 labyrinths in 4 minutes.
 
 - ✅ Initial skeleton (HTML, CSS, JS, README, .gitignore)
 - ✅ Maze layout rendering on canvas
-- ⏳ Next: Implement player movement
+- ✅ Implement player movement with smooth animation
+- ⏳ Next: Add interactive tiles (messages, checkpoint, finish tile)
