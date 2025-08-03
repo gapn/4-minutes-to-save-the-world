@@ -26,6 +26,12 @@ Player must run through 3 labyrinths in 4 minutes.
 - Tile-based map rendering from a 2D matrix
 - Basic collision detection (walls)
 - Smooth animated player movement
+- Interactive tiles:
+  - Messages (thematic hints)
+  - Checkpoint (add time)
+  - Finish (lock level, countdown to next level)
+- Overlay for collected messages
+- Status bar tracking checkpoint and collected messages
 
 ---
 
@@ -42,4 +48,5 @@ Player must run through 3 labyrinths in 4 minutes.
 - ✅ Initial skeleton (HTML, CSS, JS, README, .gitignore)
 - ✅ Maze layout rendering on canvas
 - ✅ Implement player movement with smooth animation
-- ⏳ Next: Add interactive tiles (messages, checkpoint, finish tile)
+- ✅ Interactive tiles (messages, checkpoint, finish tile)
+- ⏳ Next: Implement global timer, add Level 2 and 3 map
