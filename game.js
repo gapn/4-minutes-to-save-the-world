@@ -45,13 +45,13 @@ function drawTile(value, row, col) {
 
 function getTileColor(value) {
     switch(value) {
-        case 0: return "white";
-        case 1: return "black";
-        case 2: return "green";
-        case 3: return "red";
-        case 4: return "blue";
-        case 5: return "yellow";
-        default: return "magenta";
+        case 0: return "white"; //path
+        case 1: return "black"; //wall
+        case 2: return "green"; //start
+        case 3: return "red"; //finish
+        case 4: return "blue"; //checkpoint
+        case 5: return "yellow"; //message
+        default: return "magenta"; //fallback/debug
     };
 };
 
@@ -138,6 +138,7 @@ function update(timestamp) {
         if (progress >= 1) {
             isMoving = false;
         };
+        checkTileInteraction(playerGridRow, playerGridCol);
     };
     renderGame();
     requestAnimationFrame(update);
@@ -148,4 +149,20 @@ requestAnimationFrame(update);
 function renderGame() {
     drawLevel(levelOneMatrix);
     drawPlayer();
+};
+
+function checkTileInteraction(row, col) {
+    const tileValue = levelOneMatrix[row][col];
+    switch(tileValue) {
+        case 3: 
+            alert("Level complete!");
+            isMoving = false;
+            break;
+        case 4: 
+            alert("Checkpoint reached!");
+            break;
+        case 5: 
+            alert("💡 You found a message!");
+            break;
+    };
 };
