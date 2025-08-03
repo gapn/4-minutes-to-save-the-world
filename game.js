@@ -25,7 +25,7 @@ const levelOneMatrix = [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 ];
 
-const canvas = document.getElementById("gameCanvas");
+const canvas = document.getElementById("game-canvas");
 const context = canvas.getContext("2d");
 const tileSize = 30;
 
@@ -63,6 +63,9 @@ let startX, startY;
 let isMoving = false;
 let moveStartTime;
 const playerMoveDuration = 150;
+let checkpointsPerLevelReached = 0;
+let messagesPerLevelFound = 0;
+
 
 function playerStartingPosition(matrix) {
     for (let row = 0; row < matrix.length; row++) {
@@ -137,8 +140,8 @@ function update(timestamp) {
 
         if (progress >= 1) {
             isMoving = false;
+            checkTileInteraction(playerGridRow, playerGridCol);
         };
-        checkTileInteraction(playerGridRow, playerGridCol);
     };
     renderGame();
     requestAnimationFrame(update);
@@ -154,15 +157,24 @@ function renderGame() {
 function checkTileInteraction(row, col) {
     const tileValue = levelOneMatrix[row][col];
     switch(tileValue) {
-        case 3: 
+        case 3:
             alert("Level complete!");
             isMoving = false;
             break;
-        case 4: 
+        case 4:
             alert("Checkpoint reached!");
+            checkpointsPerLevelReached += 1;
+            updateStatusBar();
             break;
-        case 5: 
+        case 5:
             alert("💡 You found a message!");
+            messagesPerLevelFound += 1;
+            updateStatusBar();
             break;
     };
+};
+
+function updateStatusBar() {
+  const statusBar = document.getElementById("status-bar");
+  statusBar.textContent = `STATUS Checkpoint ${checkpointsPerLevelReached}/1 Messages ${messagesPerLevelFound}/5`;
 };
