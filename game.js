@@ -94,9 +94,13 @@ drawPlayer();
 
 document.addEventListener("keydown", handleKeyPress);
 
+let levelLocked = false;
+
 function handleKeyPress(event) {
+    if (levelLocked) return;
+
     const move = keystrokeMapping[event.key];
-    if (!move || isMoving) return; // ignoriraj, če ni smeri ali če je v gibanju
+    if (!move || isMoving) return;
 
     const [rowChange, colChange] = move;
     const newRow = playerGridRow + rowChange;
@@ -158,11 +162,11 @@ function checkTileInteraction(row, col) {
     const tileValue = levelOneMatrix[row][col];
     switch(tileValue) {
         case 3:
-            showme("Level complete!");
+            handleLevelFinish();
             isMoving = false;
             break;
         case 4:
-            alert("Checkpoint reached!");
+            showOverlay("⏳ You gained extra 20 seconds!")
             checkpointsPerLevelReached += 1;
             levelOneMatrix[row][col] = 0;
             updateStatusBar();
@@ -170,11 +174,11 @@ function checkTileInteraction(row, col) {
         case 5:
             if (currentMessageIndex < levelOneMatrix.length) {
                 let msg = levelOneMessages[currentMessageIndex];
-                showMessagesOverlay(msg);
+                showOverlay(msg, { saveToLog: true });
                 collectedMessages.push(msg);
                 currentMessageIndex++;
             } else {
-                showMessagesOverlay("📜 No more hidden messages in this level!")
+                showOverlay("📜 No more hidden messages in this level!")
             }
             messagesPerLevelFound += 1;
             levelOneMatrix[row][col] = 0;
@@ -188,10 +192,13 @@ function updateStatusBar() {
   statusBar.textContent = `STATUS Checkpoint ${checkpointsPerLevelReached}/1 Messages ${messagesPerLevelFound}/5`;
 };
 
-function showMessagesOverlay(text) {
+function showOverlay(text, options = {}) {
+    const { saveToLog = false} = options;
     const messageBox = document.getElementById("message");
     messageBox.innerHTML = `<p>${text}</p><button id="close-btn">Close</button>`;
     messageBox.classList.remove("hidden");
+
+    let overlayShownAt = Date.now();
 
     const closeMessageOverlay = () => {
         messageBox.classList.add("hidden");
@@ -202,19 +209,23 @@ function showMessagesOverlay(text) {
     
     const handleKeyClose = () => {
         if (!messageBox.classList.contains("hidden")) {
-            closeMessageOverlay();
-        }
+            const elapsed = Date.now() - overlayShownAt;
+            if (elapsed >= 1000) {
+                closeMessageOverlay();
+            };
+        };
     };
 
     document.addEventListener("keydown", handleKeyClose);
     
     setTimeout(closeMessageOverlay, 5000);
-    
-    collectedMessages.push(text);
-    const list = document.getElementById("message-list");
-    const li = document.createElement("li");
-    li.textContent = text;
-    list.appendChild(li);
+    if (saveToLog) {
+        collectedMessages.push(text);
+        const list = document.getElementById("message-list");
+        const li = document.createElement("li");
+        li.textContent = text;
+        list.appendChild(li);
+    };
 };
 
 const levelOneMessages = [
@@ -226,3 +237,31 @@ const levelOneMessages = [
 ]
 
 let currentMessageIndex = 0;
+
+function handleLevelFinish() {
+    levelLocked = true;
+    let countdown = 10;
+    const messageBox = document.getElementById("message");
+
+    const updateCountdown = () => {
+        messageBox.innerHTML = `
+            <p>🎉 Congrats, you escaped the heatwave!</p>
+            <p>But the fight for your life on this planet isn’t over... prepare for the next challenge!</p>
+            <p>⏳ Next level starts in <strong>${countdown}</strong> seconds...</p>
+        `;
+    };
+
+    updateCountdown();
+    messageBox.classList.remove("hidden");
+
+    const interval = setInterval(() => {
+        countdown--;
+        if (countdown > 0) {
+            updateCountdown();
+        } else {
+            clearInterval(interval);
+            messageBox.classList.add("hidden");
+            loadNextLevel();
+        }
+    }, 1000);
+}
