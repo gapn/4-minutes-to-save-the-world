@@ -25,6 +25,78 @@ const levelOneMatrix = [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
 ];
 
+const levelTwoMatrix = [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,2,0,0,0,0,0,1,0,0,0,1,0,5,0,0,0,0,0,0,1],
+    [1,1,1,1,1,0,1,1,1,1,0,1,0,1,1,1,1,1,1,0,1],
+    [1,0,0,0,1,0,0,0,0,1,0,1,0,0,0,0,0,0,1,0,1],
+    [1,0,1,0,1,1,1,1,0,1,0,1,1,1,1,1,0,1,1,0,1],
+    [1,0,1,0,0,0,0,1,0,0,0,0,0,5,0,1,0,0,0,0,1],
+    [1,0,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,0,1],
+    [1,0,0,0,0,1,0,0,0,5,0,0,0,1,0,0,0,0,1,0,1],
+    [1,1,1,1,0,1,1,1,1,1,0,1,0,1,1,1,0,1,1,0,1],
+    [1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,1],
+    [1,0,1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1,1,1,1],
+    [1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,5,0,0,1],
+    [1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,0,1,1],
+    [1,0,0,0,0,1,0,0,0,4,0,0,0,1,0,0,0,1,0,0,1],
+    [1,0,1,1,0,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1],
+    [1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1],
+    [1,1,0,1,1,1,1,1,1,1,0,1,1,1,0,1,1,1,1,0,1],
+    [1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,1],
+    [1,0,1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1],
+    [1,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,3,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+];
+
+const levelThreeMatrix = [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1,1,0,1],
+    [1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,5,1,0,1],
+    [1,0,1,1,1,1,0,1,1,1,1,1,1,1,0,1,0,1,1,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1],
+    [1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,0,1],
+    [1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1],
+    [1,0,1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,0,1,0,1],
+    [1,0,0,5,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,1],
+    [1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,5,1,0,0,0,0,0,0,0,1,4,0,0,0,1],
+    [1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1],
+    [1,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+    [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,3,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+];
+
+const levelOneMessages = [
+    "💡 Save energy – turn off lights and unplug devices when not in use.",
+    "🚲 Choose walking, cycling, or public transport instead of driving.",
+    "🥦 Eat more plant-based meals – less meat means fewer greenhouse gases.",
+    "🔄 Recycle and reuse – every item saved reduces waste and pollution.",
+    "🌳 Plant a tree or support reforestation – nature is our best ally."
+];
+
+const levelTwoMessages = [
+    "🚿 Save water – take shorter showers and fix leaks promptly.",
+    "💧 Turn off the tap while brushing teeth or washing dishes.",
+    "🌱 Water plants early in the morning or late evening to reduce evaporation.",
+    "🧺 Run washing machines and dishwashers only with full loads.",
+    "🚰 Choose a reusable bottle – reduce bottled water waste."
+];
+
+const levelThreeMessages = [
+    "⚖️ Share resources fairly – cooperation prevents conflict.",
+    "🕊️ Promote peace – invest in dialogue instead of weapons.",
+    "🌍 Protect local resources – sustainable use benefits everyone.",
+    "🤝 Support communities – strong bonds reduce the risk of wars.",
+    "📚 Educate and raise awareness – knowledge is the best defense."
+];
+
 const canvas = document.getElementById("game-canvas");
 const context = canvas.getContext("2d");
 const tileSize = 30;
@@ -66,6 +138,16 @@ const playerMoveDuration = 150;
 let checkpointsPerLevelReached = 0;
 let messagesPerLevelFound = 0;
 let collectedMessages = [];
+let globalTime = 240;
+let globalTimerInterval = null;
+let globalTimerRunning = false;
+let currentLevel = 0;
+
+const levels = [
+    { matrix: levelOneMatrix, messages: levelOneMessages },
+    { matrix: levelTwoMatrix, messages: levelTwoMessages },
+    { matrix: levelThreeMatrix, messages: levelThreeMessages }
+];
 
 function playerStartingPosition(matrix) {
     for (let row = 0; row < matrix.length; row++) {
@@ -85,12 +167,13 @@ function drawPlayer() {
     context.fill();
 };
 
-playerStartingPosition(levelOneMatrix);
+playerStartingPosition(levels[currentLevel].matrix);
 playerCoordinateX = playerGridCol * tileSize + tileSize / 2;
 playerCoordinateY = playerGridRow * tileSize + tileSize / 2;
 
-drawLevel(levelOneMatrix);
+drawLevel(levels[currentLevel].matrix);
 drawPlayer();
+updateStatusBar();
 
 document.addEventListener("keydown", handleKeyPress);
 
@@ -101,12 +184,13 @@ function handleKeyPress(event) {
 
     const move = keystrokeMapping[event.key];
     if (!move || isMoving) return;
+    if (!globalTimerRunning) { startGlobalTimer(); }
 
     const [rowChange, colChange] = move;
     const newRow = playerGridRow + rowChange;
     const newCol = playerGridCol + colChange;
 
-    if (levelOneMatrix[newRow][newCol] !== 1) {
+    if (levels[currentLevel].matrix[newRow][newCol] !== 1) {
         moveTo(newRow, newCol);
     }
 }
@@ -154,26 +238,28 @@ function update(timestamp) {
 requestAnimationFrame(update);
 
 function renderGame() {
-    drawLevel(levelOneMatrix);
+    drawLevel(levels[currentLevel].matrix);
     drawPlayer();
 };
 
 function checkTileInteraction(row, col) {
-    const tileValue = levelOneMatrix[row][col];
+    const tileValue = levels[currentLevel].matrix[row][col];
     switch(tileValue) {
         case 3:
+            stopGlobalTimer();
             handleLevelFinish();
             isMoving = false;
             break;
         case 4:
             showOverlay("⏳ You gained extra 20 seconds!")
+            globalTime += 20;
             checkpointsPerLevelReached += 1;
-            levelOneMatrix[row][col] = 0;
+            levels[currentLevel].matrix[row][col] = 0;
             updateStatusBar();
             break;
         case 5:
-            if (currentMessageIndex < levelOneMatrix.length) {
-                let msg = levelOneMessages[currentMessageIndex];
+            if (currentMessageIndex < levels[currentLevel].matrix.length) {
+                let msg = levels[currentLevel].messages[currentMessageIndex];
                 showOverlay(msg, { saveToLog: true });
                 collectedMessages.push(msg);
                 currentMessageIndex++;
@@ -181,16 +267,17 @@ function checkTileInteraction(row, col) {
                 showOverlay("📜 No more hidden messages in this level!")
             }
             messagesPerLevelFound += 1;
-            levelOneMatrix[row][col] = 0;
+            levels[currentLevel].matrix[row][col] = 0;
             updateStatusBar();
             break;
     };
 };
 
 function updateStatusBar() {
-  const statusBar = document.getElementById("status-bar");
-  statusBar.textContent = `STATUS Checkpoint ${checkpointsPerLevelReached}/1 Messages ${messagesPerLevelFound}/5`;
-};
+    const statusBar = document.getElementById("status-bar");
+    const timeText = formatTime(globalTime);
+    statusBar.textContent = `STATUS Checkpoint ${checkpointsPerLevelReached}/1 Messages ${messagesPerLevelFound}/5   ⏱️ Time left: ${timeText}   Level ${currentLevel + 1}/3`;
+    };
 
 function showOverlay(text, options = {}) {
     const { saveToLog = false} = options;
@@ -228,14 +315,6 @@ function showOverlay(text, options = {}) {
     };
 };
 
-const levelOneMessages = [
-    "💡 Save energy – turn off lights and unplug devices when not in use.",
-    "🚲 Choose walking, cycling, or public transport instead of driving.",
-    "🥦 Eat more plant-based meals – less meat means fewer greenhouse gases.",
-    "🔄 Recycle and reuse – every item saved reduces waste and pollution.",
-    "🌳 Plant a tree or support reforestation – nature is our best ally."
-]
-
 let currentMessageIndex = 0;
 
 function handleLevelFinish() {
@@ -262,6 +341,82 @@ function handleLevelFinish() {
             clearInterval(interval);
             messageBox.classList.add("hidden");
             loadNextLevel();
-        }
+        };
     }, 1000);
-}
+};
+
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes}:${secs.toString().padStart(2, "0")}`;
+};
+
+function startGlobalTimer() {
+    if (globalTimerRunning) return;
+    globalTimerRunning = true;
+
+    globalTimerInterval = setInterval(() => {
+        globalTime--;
+
+        updateStatusBar();
+
+        if (globalTime <= 0) {
+            clearInterval(globalTimerInterval);
+            globalTimerRunning = false;
+            showOverlay("💀 Time’s up! The world overheated...");
+        };
+        }, 1000);
+};
+
+function stopGlobalTimer() {
+    clearInterval(globalTimerInterval);
+    globalTimerRunning = false;
+};
+
+function loadLevel(index) {
+    currentLevel = index;
+    checkpointsPerLevelReached = 0;
+    messagesPerLevelFound = 0;
+    currentMessageIndex = 0;
+    levelLocked = false;
+
+    const level = levels[currentLevel];
+    drawLevel(level.matrix);
+    playerStartingPosition(level.matrix);
+    playerCoordinateX = playerGridCol * tileSize + tileSize / 2;
+    playerCoordinateY = playerGridRow * tileSize + tileSize / 2;
+
+    updateStatusBar();
+};
+
+function loadNextLevel() {
+    if (currentLevel < levels.length - 1) {
+        loadLevel(currentLevel + 1);
+        startGlobalTimer();
+    } else {
+        handleGameFinish();
+    };
+};
+
+function handleGameFinish() {
+    levelLocked = true;
+    stopGlobalTimer();
+
+    const messageBox = document.getElementById("message");
+    messageBox.innerHTML = `
+        <p>🌍 You made it! The world has a chance thanks to you!</p>
+        <p>Here are the messages you collected:</p>
+        <ul>${collectedMessages.map(m => `<li>${m}</li>`).join("")}</ul>
+        <button id="restart-btn">Play Again</button>
+    `;
+    messageBox.classList.remove("hidden");
+
+    document.getElementById("restart-btn").addEventListener("click", () => {
+        globalTime = 240;
+        collectedMessages = [];
+        currentLevel = 0;
+        loadLevel(0);
+        startGlobalTimer();
+        messageBox.classList.add("hidden");
+    });
+};
