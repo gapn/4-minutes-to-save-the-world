@@ -8,13 +8,17 @@
 </head>
 <body>
   <h1>Game Project Skeleton</h1>
+  <div id="status-bar">STATUS Checkpoint 0/1 Messages 0/5</div>
   <div id="game-container">
-    <div id="status-bar">STATUS Checkpoint 0/1 Messages 0/5</div>
     <div id="maze">
-    <canvas id="game-canvas" width="630" height="630"></canvas>
-    <div id="hud-overlay">
-      <div id="message" class="hidden"></div>
+      <canvas id="game-canvas" width="630" height="630"></canvas>
+      <div id="hud-overlay">
+        <div id="message" class="hidden"></div>
+      </div>
     </div>
+    <div id="messages-log">
+      <h3>Collected messages</h3>
+      <ul id="message-list"></ul>
     </div>
   </div>
   <script src="game.js"></script>

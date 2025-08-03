@@ -65,7 +65,7 @@ let moveStartTime;
 const playerMoveDuration = 150;
 let checkpointsPerLevelReached = 0;
 let messagesPerLevelFound = 0;
-
+let collectedMessages = [];
 
 function playerStartingPosition(matrix) {
     for (let row = 0; row < matrix.length; row++) {
@@ -158,17 +158,26 @@ function checkTileInteraction(row, col) {
     const tileValue = levelOneMatrix[row][col];
     switch(tileValue) {
         case 3:
-            alert("Level complete!");
+            showme("Level complete!");
             isMoving = false;
             break;
         case 4:
             alert("Checkpoint reached!");
             checkpointsPerLevelReached += 1;
+            levelOneMatrix[row][col] = 0;
             updateStatusBar();
             break;
         case 5:
-            alert("💡 You found a message!");
+            if (currentMessageIndex < levelOneMatrix.length) {
+                let msg = levelOneMessages[currentMessageIndex];
+                showMessagesOverlay(msg);
+                collectedMessages.push(msg);
+                currentMessageIndex++;
+            } else {
+                showMessagesOverlay("📜 No more hidden messages in this level!")
+            }
             messagesPerLevelFound += 1;
+            levelOneMatrix[row][col] = 0;
             updateStatusBar();
             break;
     };
@@ -178,3 +187,42 @@ function updateStatusBar() {
   const statusBar = document.getElementById("status-bar");
   statusBar.textContent = `STATUS Checkpoint ${checkpointsPerLevelReached}/1 Messages ${messagesPerLevelFound}/5`;
 };
+
+function showMessagesOverlay(text) {
+    const messageBox = document.getElementById("message");
+    messageBox.innerHTML = `<p>${text}</p><button id="close-btn">Close</button>`;
+    messageBox.classList.remove("hidden");
+
+    const closeMessageOverlay = () => {
+        messageBox.classList.add("hidden");
+        document.removeEventListener("keydown", handleKeyClose);
+    };
+
+    document.getElementById("close-btn").addEventListener("click", closeMessageOverlay);
+    
+    const handleKeyClose = () => {
+        if (!messageBox.classList.contains("hidden")) {
+            closeMessageOverlay();
+        }
+    };
+
+    document.addEventListener("keydown", handleKeyClose);
+    
+    setTimeout(closeMessageOverlay, 5000);
+    
+    collectedMessages.push(text);
+    const list = document.getElementById("message-list");
+    const li = document.createElement("li");
+    li.textContent = text;
+    list.appendChild(li);
+};
+
+const levelOneMessages = [
+    "💡 Save energy – turn off lights and unplug devices when not in use.",
+    "🚲 Choose walking, cycling, or public transport instead of driving.",
+    "🥦 Eat more plant-based meals – less meat means fewer greenhouse gases.",
+    "🔄 Recycle and reuse – every item saved reduces waste and pollution.",
+    "🌳 Plant a tree or support reforestation – nature is our best ally."
+]
+
+let currentMessageIndex = 0;
