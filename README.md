@@ -32,6 +32,8 @@ Player must run through 3 labyrinths in 4 minutes.
   - Finish (lock level, countdown to next level)
 - Overlay for collected messages
 - Status bar tracking checkpoint and collected messages
+- Level progression
+- Global countdown timer
 
 ---
 
@@ -49,4 +51,5 @@ Player must run through 3 labyrinths in 4 minutes.
 - ✅ Maze layout rendering on canvas
 - ✅ Implement player movement with smooth animation
 - ✅ Interactive tiles (messages, checkpoint, finish tile)
-- ⏳ Next: Implement global timer, add Level 2 and 3 map
+- ✅ Implement global timer, and level progression (3 maps)
+- ⏳ Next: Thematic backgrounds
