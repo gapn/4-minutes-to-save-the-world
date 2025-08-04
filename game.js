@@ -279,8 +279,10 @@ function updateStatusBar() {
     statusBar.textContent = `STATUS Checkpoint ${checkpointsPerLevelReached}/1 Messages ${messagesPerLevelFound}/5   ⏱️ Time left: ${timeText}   Level ${currentLevel + 1}/3`;
     };
 
+let overlayLocked = false;
+
 function showOverlay(text, options = {}) {
-    const { saveToLog = false} = options;
+    const { saveToLog = false, allowKeyClose = true } = options;
     const messageBox = document.getElementById("message");
     messageBox.innerHTML = `<p>${text}</p><button id="close-btn">Close</button>`;
     messageBox.classList.remove("hidden");
@@ -289,12 +291,14 @@ function showOverlay(text, options = {}) {
 
     const closeMessageOverlay = () => {
         messageBox.classList.add("hidden");
-        document.removeEventListener("keydown", handleKeyClose);
+        if (allowKeyClose) {
+            document.removeEventListener("keydown", handleKeyClose);
+        };
     };
 
-    document.getElementById("close-btn").addEventListener("click", closeMessageOverlay);
-    
     const handleKeyClose = () => {
+        if (overlayLocked) return;
+
         if (!messageBox.classList.contains("hidden")) {
             const elapsed = Date.now() - overlayShownAt;
             if (elapsed >= 1000) {
@@ -303,9 +307,16 @@ function showOverlay(text, options = {}) {
         };
     };
 
-    document.addEventListener("keydown", handleKeyClose);
+    document.getElementById("close-btn").addEventListener("click", closeMessageOverlay);
     
-    setTimeout(closeMessageOverlay, 5000);
+    if (allowKeyClose && !overlayLocked) {
+        setTimeout(() => {
+            document.addEventListener("keydown", handleKeyClose);
+        }, 1000);
+    }   
+    
+    //setTimeout(closeMessageOverlay, 5000);
+
     if (saveToLog) {
         collectedMessages.push(text);
         const list = document.getElementById("message-list");
@@ -319,12 +330,20 @@ let currentMessageIndex = 0;
 
 function handleLevelFinish() {
     levelLocked = true;
+
+    if (currentLevel === levels.length -1) {
+        handleGameFinish();
+        return;
+    }
+
+    overlayLocked = true;
+
     let countdown = 10;
     const messageBox = document.getElementById("message");
 
     const updateCountdown = () => {
         messageBox.innerHTML = `
-            <p>🎉 Congrats, you escaped the heatwave!</p>
+            <p>🎉 Congrats, you escaped the catastrophe!</p>
             <p>But the fight for your life on this planet isn’t over... prepare for the next challenge!</p>
             <p>⏳ Next level starts in <strong>${countdown}</strong> seconds...</p>
         `;
@@ -340,6 +359,7 @@ function handleLevelFinish() {
         } else {
             clearInterval(interval);
             messageBox.classList.add("hidden");
+            overlayLocked = false;
             loadNextLevel();
         };
     }, 1000);
@@ -363,7 +383,7 @@ function startGlobalTimer() {
         if (globalTime <= 0) {
             clearInterval(globalTimerInterval);
             globalTimerRunning = false;
-            showOverlay("💀 Time’s up! The world overheated...");
+            showOverlay("💀 Time’s up! The world as you know it si gone... You can restart the game, but the real world does not have a restart button!");
         };
         }, 1000);
 };
@@ -402,11 +422,11 @@ function handleGameFinish() {
     levelLocked = true;
     stopGlobalTimer();
 
+    overlayLocked = true;
+
     const messageBox = document.getElementById("message");
     messageBox.innerHTML = `
-        <p>🌍 You made it! The world has a chance thanks to you!</p>
-        <p>Here are the messages you collected:</p>
-        <ul>${collectedMessages.map(m => `<li>${m}</li>`).join("")}</ul>
+        <p>🌍 You made it! You survived and now know how to help our planet. The world has a chance thanks to you!</p>
         <button id="restart-btn">Play Again</button>
     `;
     messageBox.classList.remove("hidden");
@@ -418,5 +438,6 @@ function handleGameFinish() {
         loadLevel(0);
         startGlobalTimer();
         messageBox.classList.add("hidden");
+        overlayLocked = false;
     });
 };
