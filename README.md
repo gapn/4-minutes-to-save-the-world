@@ -5,7 +5,7 @@
 
 ---
 
-## Concept (PROPOSED)
+## Concept
 
 Player must run through 3 labyrinths in 4 minutes.
 
@@ -15,13 +15,19 @@ Player must run through 3 labyrinths in 4 minutes.
 
 ---
 
+## How to Play
+
+Your goal is to navigate through three challenging mazes before the 4-minute timer expires. On each level, you can collect 5 educational messages to understand how to help the world. Look for checkpoints to gain extra time, but be quick — humanity is counting on you!
+
+---
+
 ## Controls
 
 - **Arrow Keys** → Move the player
 
 ---
 
-## Features (so far)
+## Key Features
 
 - Tile-based map rendering from a 2D matrix
 - Basic collision detection (walls)
@@ -34,6 +40,12 @@ Player must run through 3 labyrinths in 4 minutes.
 - Status bar tracking checkpoint and collected messages
 - Level progression
 - Global countdown timer
+- Full-screen intro screen to set the story
+- Game legend explaining tile colors
+- Thematic backgrounds for the page and for each level
+- Asset preloader to ensure smooth loading
+- Complete win/lose conditions with a universal restart option
+- Fully centered and responsive UI layout
 
 ---
 
@@ -52,4 +64,15 @@ Player must run through 3 labyrinths in 4 minutes.
 - ✅ Implement player movement with smooth animation
 - ✅ Interactive tiles (messages, checkpoint, finish tile)
 - ✅ Implement global timer, and level progression (3 maps)
-- ⏳ Next: Thematic backgrounds
+- ✅ Implement thematic backgrounds and asset preloader
+- ✅ Add full-screen intro and game legend
+- ✅ Overhaul UI with a centered layout and consistent theme
+
+## Future Ideas ⏳
+
+- Add background music and sound effects (SFX) for movement and actions
+- Add fade-in/fade-out transitions between levels
+- Animate UI elements, like making the timer pulse when time is low
+- Use a custom font for the UI to give it a unique look
+- controls on screen (for mobile devices)
+- bigger maze

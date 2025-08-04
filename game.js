@@ -1,4 +1,3 @@
-// Game skeleton
 console.log("Game project initialized.");
 
 const levelOneMatrix = [
@@ -102,6 +101,15 @@ const context = canvas.getContext("2d");
 const tileSize = 30;
 
 function drawLevel(matrix) {
+    const backgroundImage = levels[currentLevel].imageObject;
+
+    if (backgroundImage && backgroundImage.complete && backgroundImage.naturalWidth !== 0) {
+        context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+    } else {
+        context.fillStyle = "grey";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+    };
+
     for (let row = 0; row < matrix.length; row++) {
         for (let col = 0; col < matrix[row].length; col++) {
             drawTile(matrix[row][col], row, col);
@@ -117,8 +125,8 @@ function drawTile(value, row, col) {
 
 function getTileColor(value) {
     switch(value) {
-        case 0: return "white"; //path
-        case 1: return "black"; //wall
+        case 0: return "rgba(255, 255, 255, 0.3)"; //path
+        case 1: return "#222"; //wall
         case 2: return "green"; //start
         case 3: return "red"; //finish
         case 4: return "blue"; //checkpoint
@@ -126,7 +134,6 @@ function getTileColor(value) {
         default: return "magenta"; //fallback/debug
     };
 };
-
 
 let playerGridRow, playerGridCol;
 let playerCoordinateX, playerCoordinateY;
@@ -144,9 +151,9 @@ let globalTimerRunning = false;
 let currentLevel = 0;
 
 const levels = [
-    { matrix: levelOneMatrix, messages: levelOneMessages },
-    { matrix: levelTwoMatrix, messages: levelTwoMessages },
-    { matrix: levelThreeMatrix, messages: levelThreeMessages }
+    { matrix: levelOneMatrix, messages: levelOneMessages, backgroundImage: "assets/backgrounds/level1_bg.jpg" },
+    { matrix: levelTwoMatrix, messages: levelTwoMessages, backgroundImage: "assets/backgrounds/level2_bg.jpg" },
+    { matrix: levelThreeMatrix, messages: levelThreeMessages, backgroundImage: "assets/backgrounds/level3_bg.jpg" }
 ];
 
 function playerStartingPosition(matrix) {
@@ -167,15 +174,20 @@ function drawPlayer() {
     context.fill();
 };
 
-playerStartingPosition(levels[currentLevel].matrix);
-playerCoordinateX = playerGridCol * tileSize + tileSize / 2;
-playerCoordinateY = playerGridRow * tileSize + tileSize / 2;
+function startGame() {
 
-drawLevel(levels[currentLevel].matrix);
-drawPlayer();
-updateStatusBar();
+    playerStartingPosition(levels[currentLevel].matrix);
+    playerCoordinateX = playerGridCol * tileSize + tileSize / 2;
+    playerCoordinateY = playerGridRow * tileSize + tileSize / 2;
 
-document.addEventListener("keydown", handleKeyPress);
+    drawLevel(levels[currentLevel].matrix);
+    drawPlayer();
+    updateStatusBar();
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    requestAnimationFrame(update);
+}
 
 let levelLocked = false;
 
@@ -235,7 +247,28 @@ function update(timestamp) {
     requestAnimationFrame(update);
 };
 
-requestAnimationFrame(update);
+function preloadImagesAndStartGame() {
+    let imagesToLoad = levels.length;
+    let imagesLoaded = 0;
+
+    function onImageLoad() {
+        imagesLoaded++;
+        if (imagesLoaded === imagesToLoad) {
+            console.log("All background images loaded. Starting game.");
+            const startBtn = document.getElementById("start-game-btn");
+            startBtn.disabled = false;
+            startBtn.textContent = "Begin Mission";
+        };
+    }
+
+    console.log("Preloading background images...");
+    levels.forEach(level => {
+        level.imageObject = new Image();
+        level.imageObject.onload = onImageLoad;
+        level.imageObject.onerror = onImageLoad;
+        level.imageObject.src = level.backgroundImage;
+    });
+};
 
 function renderGame() {
     drawLevel(levels[currentLevel].matrix);
@@ -383,9 +416,10 @@ function startGlobalTimer() {
         if (globalTime <= 0) {
             clearInterval(globalTimerInterval);
             globalTimerRunning = false;
-            showOverlay("💀 Time’s up! The world as you know it si gone... You can restart the game, but the real world does not have a restart button!");
+            const loseMessage = "💀 Time’s up! The world as you know it is gone... You can restart the game, but the real world does not have a restart button!";
+            handleGameOver(loseMessage);
         };
-        }, 1000);
+    }, 1000);
 };
 
 function stopGlobalTimer() {
@@ -418,15 +452,14 @@ function loadNextLevel() {
     };
 };
 
-function handleGameFinish() {
+function handleGameOver(message) {
     levelLocked = true;
     stopGlobalTimer();
-
     overlayLocked = true;
 
     const messageBox = document.getElementById("message");
     messageBox.innerHTML = `
-        <p>🌍 You made it! You survived and now know how to help our planet. The world has a chance thanks to you!</p>
+        <p>${message}</p>
         <button id="restart-btn">Play Again</button>
     `;
     messageBox.classList.remove("hidden");
@@ -434,10 +467,33 @@ function handleGameFinish() {
     document.getElementById("restart-btn").addEventListener("click", () => {
         globalTime = 240;
         collectedMessages = [];
+        document.getElementById("message-list").innerHTML = "";
+
         currentLevel = 0;
         loadLevel(0);
-        startGlobalTimer();
+        
         messageBox.classList.add("hidden");
         overlayLocked = false;
     });
 };
+
+function handleGameFinish() {
+    const winMessage = "🌍 You made it! You survived and now know how to help our planet. The world has a chance thanks to you!";
+    handleGameOver(winMessage);
+};
+
+preloadImagesAndStartGame();
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+    const startBtn = document.getElementById("start-game-btn");
+    const introScreen = document.getElementById("intro-screen");
+
+    startBtn.addEventListener("click", () => {
+        introScreen.style.opacity = "0";
+        setTimeout(() => {
+            introScreen.style.display = "none";
+        }, 500);
+        startGame();
+    });
+});

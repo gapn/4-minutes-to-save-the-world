@@ -1,9 +1,31 @@
-/* Skeleton CSS */
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10vh;
+
+  background-color: #000;
+  background-image: url('assets/ui/space_background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+
   font-family: sans-serif;
+  text-align: center;
 }
 canvas {
   border: 1px solid black;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+h3 {
+  color: white;
+  text-decoration: underline;
 }
 
 #game-container {
@@ -34,10 +56,9 @@ canvas {
 }
 
 #status-bar {
-  margin-bottom: 2px;
   font-family: monospace;
   font-size: 14px;
-  background: rgba(0,0,0,0.7);
+  background: rgba(156, 154, 154, 0.7);
   color: white;
   padding: 4px 8px;
   border-radius: 4px;
@@ -50,11 +71,14 @@ canvas {
 
 #messages-log {
   font-family: monospace;
-  background: #f9f9f9;
+  background: rgba(156, 154, 154, 0.5);
   border: 1px solid #ccc;
   padding: 8px 12px;
   border-radius: 6px;
-  max-width: 200px;
+  width: 310px;
+  height: 615px;
+  overflow-y: auto;
+  color: white;
 }
 
 #message {
@@ -95,4 +119,94 @@ canvas {
   #messages-log {
     max-width: 100%;
   }
+}
+
+#legend {
+  padding: 8px 15px;
+  background: rgba(0,0,0,0.7);
+  border-radius: 6px;
+
+  color: white;
+  font-family: monospace;
+  font-size: 14px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-color-box {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #666;
+  display: inline-block;
+}
+
+.legend-green { background-color: green; }
+.legend-red { background-color: red; }
+.legend-blue { background-color: blue; }
+.legend-yellow { background-color: yellow; }
+
+#intro-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+
+  background-color: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: opacity 0.5s ease-out;
+}
+
+.intro-content {
+  color: white;
+  text-align: center;
+  font-family: monospace;
+  max-width: 500px;
+  padding: 20px;
+}
+
+.intro-content h2 {
+  font-size: 28px;
+  color: turquoise;
+}
+
+.intro-content p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 20px 0;
+}
+
+#start-game-btn {
+  padding: 12px 24px;
+  font-size: 18px;
+  background: turquoise;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: monospace;
+  transition: background-color 0.3s;
+}
+
+#start-game-btn:disabled {
+  background-color: #555;
+  cursor: wait;
+}
+
+#start-game-btn:not(:disabled):hover {
+  background-color: white;
 }

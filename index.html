@@ -7,7 +7,15 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Game Project Skeleton</h1>
+  <div id="intro-screen">
+    <div class="intro-content">
+      <h2>4 Minutes to Save the World</h2>
+      <p>The year is <span id="current-year">2025</span>. The world is on the brink of catastrophe.</p>
+      <p>You have 4 minutes to navigate the challenges ahead and gather the knowledge needed to help save our planet.</p>
+      <button id="start-game-btn" disabled>Loading Assets...</button>
+    </div>
+  </div>
+  <h1>🌍 4 Minutes to Save the World 🌍</h1>
   <div id="status-bar">STATUS Checkpoint 0/1 Messages 0/5</div>
   <div id="game-container">
     <div id="maze">
@@ -19,6 +27,20 @@
     <div id="messages-log">
       <h3>Collected messages</h3>
       <ul id="message-list"></ul>
+    </div>
+  </div>
+  <div id="legend">
+    <div class="legend-item">
+      <span class="legend-color-box legend-green"></span> = Start
+    </div>
+    <div class="legend-item">
+      <span class="legend-color-box legend-red"></span> = Finish
+    </div>
+    <div class="legend-item">
+      <span class="legend-color-box legend-blue"></span> = Checkpoint (extra time)
+    </div>
+    <div class="legend-item">
+      <span class="legend-color-box legend-yellow"></span> = Educational hints
     </div>
   </div>
   <script src="game.js"></script>
