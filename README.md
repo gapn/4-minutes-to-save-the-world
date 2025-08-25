@@ -76,3 +76,9 @@ Your goal is to navigate through three challenging mazes before the 4-minute tim
 - Use a custom font for the UI to give it a unique look
 - controls on screen (for mobile devices)
 - bigger maze
+
+---
+
+## License
+
+This project is licensed under the [MIT License](./LICENSE.txt).
