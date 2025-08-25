@@ -43,3 +43,9 @@ Player must run through 3 labyrinths in 4 minutes.
 - ✅ Maze layout rendering on canvas
 - ✅ Implement player movement with smooth animation
 - ⏳ Next: Add interactive tiles (messages, checkpoint, finish tile)
+
+---
+
+## License
+
+This project is licensed under the [MIT License](./LICENSE.txt).
